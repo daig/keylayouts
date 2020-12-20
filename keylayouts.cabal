@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5e27223ec673c969690cd99636e887277be866b40389121986c3e5ca4ca03c3d
+-- hash: 450a62a1218390edfa47bad3d166034b92e94d9ee4e43260caf41e8f7ca2c540
 
 name:           keylayouts
-version:        0.1.0.1
+version:        0.1.0.2
 synopsis:       Tools for macOS .keylayout files
 description:    Datatypes, parsing, and printing for .keylayout files, Used for advanced keyboard mappings on macOS. https://developer.apple.com/library/archive/technotes/tn2056/_index.html
 category:       xml, configuration
@@ -24,6 +24,7 @@ extra-source-files:
 library
   exposed-modules:
       Keyboard
+      KeyCode
   other-modules:
       XML
   hs-source-dirs:

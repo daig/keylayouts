@@ -14,6 +14,7 @@ import qualified Data.Text.Encoding as Text
 import Data.Char (toLower)
 import XML
 import Data.String
+import KeyCode (KeyCode(Virtual))
 
 newtype Id a = Id {unId :: ByteString}
 instance IsString (Id a) where fromString = Id . BS.pack
@@ -188,21 +189,20 @@ instance XML KeyMap where
                  (unlines $ fmap toXML $ NE.toList $ keyMap_keys km)
  
 
-data KeyCode = Virtual ByteString
 data Key = KeyOutput {key_code :: KeyCode , key_output :: ByteString}
          | KeyNamedAction {key_code :: KeyCode, key_namedAction :: Id Action}
          | KeyAction {key_code :: KeyCode, key_action :: NonEmpty When}
 instance XML Key where
-  fromXML (XML "key" as cs) = let (Just (Virtual -> code), as') = Map.updateLookupWithKey (\_ _ -> Nothing) "code" as
+  fromXML (XML "key" as cs) = let (Just (Virtual . readBS -> code), as') = Map.updateLookupWithKey (\_ _ -> Nothing) "code" as
                               in case (Map.toList as',cs) of
     ([("output",o)], []) -> KeyOutput code o
     ([("action",a)], []) -> KeyNamedAction code (Id a)
     ([], [a]) -> KeyAction code $ fromXML a
     _ -> error "fromXML Key"
   toXML = \case
-    KeyOutput (Virtual (BS.unpack -> c)) (BS.unpack -> o) -> printf "\t\t\t<key code=\"%s\" output=\"%s\" />" c o
-    KeyNamedAction (Virtual (BS.unpack -> c)) (Id (BS.unpack -> a)) -> printf "\t\t\t<key code=\"%s\" action=\"%s\" />" c a
-    KeyAction (Virtual (BS.unpack -> c)) ws -> printf "\t\t\t<key code=\"%s\">\n%s\t\t\t</key>" c $ toXML ws
+    KeyOutput (Virtual c) (BS.unpack -> o) -> printf "\t\t\t<key code=\"%d\" output=\"%s\" />" c o
+    KeyNamedAction (Virtual c) (Id (BS.unpack -> a)) -> printf "\t\t\t<key code=\"%d\" action=\"%s\" />" c a
+    KeyAction (Virtual c) ws -> printf "\t\t\t<key code=\"%d\">\n%s\t\t\t</key>" c $ toXML ws
 --
 -- | Single Action within 'Key'
 instance XML (NonEmpty When) where
