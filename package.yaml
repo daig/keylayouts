@@ -1,7 +1,9 @@
 name:                keylayouts
 version:             0.1.0.0
-#synopsis:
-#description:
+synopsis:            Tools for macOS .keylayout files
+description:         Datatypes, parsing, and printing for .keylayout files,
+                     Used for advanced keyboard mappings on macOS.
+                     https://developer.apple.com/library/archive/technotes/tn2056/_index.html
 homepage:            https://github.com/githubuser/keylayouts#readme
 license:             BSD3
 author:              Author name here
