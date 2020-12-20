@@ -18,6 +18,15 @@ dependencies:
   - bytestring
   - pretty-simple
   - text
+default-extensions:
+  - LambdaCase
+  - BlockArguments
+  - StandaloneDeriving
+  - FlexibleInstances
+  - OverloadedStrings
+  - PatternSynonyms
+  - ViewPatterns
 
 library:
     source-dirs:      src
+    other-modules: XML
