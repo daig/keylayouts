@@ -18,7 +18,6 @@ dependencies:
   - containers
   - xeno
   - bytestring
-  - pretty-simple
   - text
 default-extensions:
   - LambdaCase
