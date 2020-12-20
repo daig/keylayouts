@@ -1,5 +1,5 @@
 name:                keylayouts
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Tools for macOS .keylayout files
 description:         Datatypes, parsing, and printing for .keylayout files,
                      Used for advanced keyboard mappings on macOS.
