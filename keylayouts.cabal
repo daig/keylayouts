@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 450a62a1218390edfa47bad3d166034b92e94d9ee4e43260caf41e8f7ca2c540
+-- hash: dddc53d6dfa08f56453d94d91a4db556f2677a15e031295a0f1a0c4bed4fc394
 
 name:           keylayouts
 version:        0.1.0.2
@@ -23,17 +23,34 @@ extra-source-files:
 
 library
   exposed-modules:
+      Fragments
       Keyboard
+      Keyboard.Action
+      Keyboard.Action.State
+      Keyboard.Action.When
+      Keyboard.Action.When.Terminator
+      Keyboard.Id
+      Keyboard.Ix
+      Keyboard.Key
+      Keyboard.Key.Map
+      Keyboard.Key.Map.Select
+      Keyboard.Key.Map.Set
+      Keyboard.Key.Map.Set.Id
+      Keyboard.Layouts
+      Keyboard.Modifier
+      Keyboard.Modifier.Map
       KeyCode
-  other-modules:
       XML
+  other-modules:
+      Pre
   hs-source-dirs:
       src
-  default-extensions: LambdaCase BlockArguments StandaloneDeriving FlexibleInstances OverloadedStrings PatternSynonyms ViewPatterns
+  default-extensions: LambdaCase BlockArguments StandaloneDeriving FlexibleInstances OverloadedStrings PatternSynonyms ViewPatterns NoImplicitPrelude
   build-depends:
       base >=4.7 && <5
     , bytestring
     , containers
+    , pretty-simple
     , text
     , xeno
   default-language: Haskell2010

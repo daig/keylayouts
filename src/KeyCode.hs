@@ -14,8 +14,9 @@ module KeyCode
           ,Section
           ,Yen, Underscore, KeypadComma, Eisu, Kana)
   ) where
+import Prelude
 
-data KeyCode = Virtual Word
+data KeyCode = Virtual Word deriving Show
 
 -- * ANSI Keyboards only
 pattern A = Virtual 0x00

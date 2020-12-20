@@ -19,6 +19,7 @@ dependencies:
   - xeno
   - bytestring
   - text
+  - pretty-simple
 default-extensions:
   - LambdaCase
   - BlockArguments
@@ -27,7 +28,8 @@ default-extensions:
   - OverloadedStrings
   - PatternSynonyms
   - ViewPatterns
+  - NoImplicitPrelude
 
 library:
     source-dirs:      src
-    other-modules: XML
+    other-modules: Pre
