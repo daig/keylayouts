@@ -1,13 +1,13 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.3.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9a60543d05d9fdc1e3ddcf3c35eb3403ec57ae009bd8ca2d2a8c23bd4d9f4b49
+-- hash: 5e27223ec673c969690cd99636e887277be866b40389121986c3e5ca4ca03c3d
 
 name:           keylayouts
-version:        0.1.0.0
+version:        0.1.0.1
 synopsis:       Tools for macOS .keylayout files
 description:    Datatypes, parsing, and printing for .keylayout files, Used for advanced keyboard mappings on macOS. https://developer.apple.com/library/archive/technotes/tn2056/_index.html
 category:       xml, configuration
@@ -33,7 +33,6 @@ library
       base >=4.7 && <5
     , bytestring
     , containers
-    , pretty-simple
     , text
     , xeno
   default-language: Haskell2010

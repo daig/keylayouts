@@ -8,7 +8,6 @@ import Data.Map (Map, (!))
 import Data.Word (Word8)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString.Char8 as BS
-import Text.Pretty.Simple
 import qualified Data.Text as Text
 import qualified Data.Text as Text
 import qualified Data.Text.Encoding as Text
