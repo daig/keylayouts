@@ -4,12 +4,12 @@ synopsis:            Tools for macOS .keylayout files
 description:         Datatypes, parsing, and printing for .keylayout files,
                      Used for advanced keyboard mappings on macOS.
                      https://developer.apple.com/library/archive/technotes/tn2056/_index.html
-homepage:            https://github.com/githubuser/keylayouts#readme
-license:             BSD3
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2020 Author name here
-category:            Web
+homepage:            https://github.com/daig/keylayouts#readme
+license:             MIT
+author:              Dai
+maintainer:          daig@sodality.cc
+copyright:           2020 Dai
+category:            xml, configuration
 extra-source-files:
 - README.md
 
