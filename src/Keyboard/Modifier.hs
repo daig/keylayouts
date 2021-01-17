@@ -1,4 +1,4 @@
-{-# language OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-overlapping-patterns #-}
 module Keyboard.Modifier where
 import Pre
 import Data.Char (toLower)

@@ -29,6 +29,10 @@ default-extensions:
   - PatternSynonyms
   - ViewPatterns
   - NoImplicitPrelude
+  - GeneralizedNewtypeDeriving
+  - TypeApplications
+  - DisambiguateRecordFields
+  - DerivingStrategies
 
 library:
     source-dirs:      src

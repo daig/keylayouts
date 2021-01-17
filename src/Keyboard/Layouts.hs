@@ -5,7 +5,7 @@ import Keyboard.Key.Map.Set.Id
 
 newtype Layouts = Layouts {layouts_layouts :: NonEmpty Layout} deriving Show
 instance XML Layouts where
-  fromXML (XML "layouts" as cs) = Layouts . fromList $ find' "layout" cs
+  fromXML (XML "layouts" as cs) = Layouts . fromList $ filterName "layout" cs
   toXML (Layouts ls) = printf "\t<layouts>\n%s\t</layouts>" . unlines . fmap toXML $ toList ls
 data Layout
   = Layout {layout_first :: Word, layout_last :: Word
