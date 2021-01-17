@@ -9,7 +9,7 @@ data KeyMap
  = KeyMap {index :: Ix KeyMap
           ,base :: Maybe (KeyMapSet_Id, Ix KeyMap)
           ,keys :: NonEmpty Key }
-    deriving Show
+    deriving (Show, Read)
 instance XML KeyMap where
   fromXML (XML "keyMap" as cs)
     = KeyMap {index = Ix . readBS $ as ! "index"

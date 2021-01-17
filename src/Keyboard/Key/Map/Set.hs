@@ -4,7 +4,7 @@ import Keyboard.Key.Map.Set.Id
 import Keyboard.Key.Map
 
 data KeyMapSet = KeyMapSet {id :: KeyMapSet_Id, keyMaps :: NonEmpty KeyMap}
-  deriving Show
+  deriving (Show, Read)
 instance XML KeyMapSet where
   fromXML (XML "keyMapSet" (readBS . (! "id") -> i) cs)
     = KeyMapSet {id = i

@@ -7,7 +7,7 @@ data ModifierMap
   = ModifierMap {id :: Id ModifierMap
                 ,defaultIndex :: Ix KeyMap
                 ,keyMapSelects :: NonEmpty KeyMapSelect}
-      deriving Show
+      deriving (Show, Read)
 instance XML ModifierMap where
   fromXML (XML "modifierMap" as cs)
     = ModifierMap {id = Id $ as ! "id"

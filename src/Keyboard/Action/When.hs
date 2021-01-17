@@ -15,7 +15,7 @@ data When
   | When {state :: State
          ,next :: Maybe State
          ,output :: Maybe ByteString
-         } deriving Show
+         } deriving (Show, Read)
 instance XML When where
   fromXML (XML "when" as cs) = 
     let state = as ! "state"

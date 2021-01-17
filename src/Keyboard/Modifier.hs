@@ -4,7 +4,7 @@ import Pre
 import Data.Char (toLower)
 import Data.String (IsString(..))
 
-newtype Modifier = Modifier {modifier_keys :: ModifierChord} deriving Show
+newtype Modifier = Modifier {keys :: ModifierChord} deriving newtype (Show, Read)
 instance XML Modifier where
   fromXML (XML "modifier" as _) = Modifier $ parseChord $ as ! "keys" where
     parseChord :: ByteString -> ModifierChord
@@ -33,12 +33,12 @@ instance XML Modifier where
     uncap (a:as) = toLower a : as
     printStatus = \case {(:!) -> ""; (:?) -> "?"}
       
-newtype ModifierChord = ModifierChord (Map ModifierKey ModifierStatus) deriving Show
-data Mod = Shift | Option | Control deriving (Eq, Ord,Show)
-data Side = L | R | Any deriving (Eq,Ord,Show)
+newtype ModifierChord = ModifierChord (Map ModifierKey ModifierStatus) deriving newtype (Show, Read)
+data Mod = Shift | Option | Control deriving (Eq, Ord,Show,Read)
+data Side = L | R | Any deriving (Eq,Ord,Show,Read)
 instance Semigroup Side where L <> L = L; R <> R = R; _ <> _ = Any
-data ModifierKey = Mod Mod Side | Command | Caps deriving (Show,Eq,Ord)
-data ModifierStatus = (:!) {- ^ Required -} | (:?) {- ^ Irrelevant -} deriving (Show,Eq)
+data ModifierKey = Mod Mod Side | Command | Caps deriving (Show,Eq,Ord,Read)
+data ModifierStatus = (:!) {- ^ Required -} | (:?) {- ^ Irrelevant -} deriving (Show,Eq,Read)
 instance Semigroup ModifierChord where
   ModifierChord m <> n = foldrWithKey (\k v r -> include k v r) n m where
       include :: ModifierKey -> ModifierStatus -> ModifierChord -> ModifierChord

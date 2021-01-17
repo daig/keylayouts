@@ -1,5 +1,5 @@
 module Pre (module Pre, module X) where
-import Prelude as X hiding (lookup,words,stripPrefix,map,id)
+import Prelude as X hiding (lookup,words,stripPrefix,map,id,last)
 import XML as X hiding (name)
 import Text.Printf as X
 import Data.List.NonEmpty as X (NonEmpty)
@@ -16,3 +16,6 @@ readBS = read . unpack
 
 null' :: b -> ([a] -> b) -> [a] -> b
 null' z s = \case {[] -> z; as -> s as}
+
+for_ :: (Foldable t, Monoid m) => t a -> (a -> m) -> m
+for_ = flip foldMap

@@ -14,9 +14,11 @@ module KeyCode
           ,Section
           ,Yen, Underscore, KeypadComma, Eisu, Kana)
   ) where
-import Prelude
+import Pre hiding (stripPrefix)
+import Data.List (stripPrefix)
+import Data.Monoid (First(..))
 
-data KeyCode = Virtual Word deriving Show
+newtype KeyCode = Virtual Word
 
 -- * ANSI Keyboards only
 pattern A = Virtual 0x00
@@ -144,3 +146,60 @@ pattern Underscore = Virtual 0x5E
 pattern KeypadComma = Virtual 0x5F
 pattern Eisu = Virtual 0x66
 pattern Kana = Virtual 0x68
+
+keycodes :: [KeyCode]
+keycodes =
+  [ One, Two, Three, Four, Six, Five, Equal, Nine, Seven, Minus
+  ,Eight, Zero, RightBracket, LeftBracket, Quote
+  , Semicolon, Backslash, Comma, Slash, Period, Grave, KeypadDecimal
+  , KeypadMultiply, KeypadPlus, KeypadClear, KeypadDivide, KeypadEnter, KeypadMinus
+  , KeypadEquals, Keypad0, Keypad1, Keypad2, Keypad3, Keypad4, Keypad5, Keypad6, Keypad7, Keypad8, Keypad9
+  ,Return, Tab, Space, Delete, Escape, Command, Shift, CapsLock, Option, Control, RightCommand, RightShift
+  , RightOption, RightControl, Function, F17, VolumeUp, VolumeDown, Mute, F18, F19, F20, F5, F6, F7, F3, F8
+  , F9, F11, F13, F16, F14, F10, F12, F15, Help, Home, PageUp, ForwardDelete, F4, End, F2, PageDown, F1
+  , LeftArrow, RightArrow, DownArrow, UpArrow
+  ,Section ,Yen, Underscore, KeypadComma, Eisu, Kana
+  ,A, S, D, F, H, G, Z, X, C, V, B, Q, W, E, R, Y, T
+  ,O, U, I, P , L , J, K, M, N
+    ]
+
+instance Show KeyCode where
+  show = \case
+    A -> "A"; S -> "S"; D -> "D"; F -> "F"; H -> "H"; G -> "G";
+    Z -> "Z"; X -> "X"; C -> "C"; V -> "V"; B -> "B"; Q -> "Q";
+    W -> "W"; E -> "E"; R -> "R"; Y -> "Y"; T -> "T";
+    One -> "One"; Two -> "Two"; Three -> "Three"; Four -> "Four";
+    Six -> "Six"; Five -> "Five"; Equal -> "Equal"; Nine -> "Nine";
+    Seven -> "Seven"; Minus -> "Minus"; Eight -> "Eight"; Zero -> "Zero";
+    RightBracket -> "RightBracket"; O -> "O"; U -> "U"; LeftBracket -> "LeftBracket";
+    I -> "I"; P -> "P"; L -> "L"; J -> "J"; Quote -> "Quote"; K -> "K";
+    Semicolon -> "Semicolon"; Backslash -> "Backslash"; Comma -> "Comma";
+    Slash -> "Slash"; N -> "N"; M -> "M"; Period -> "Period"; Grave -> "Grave";
+    KeypadDecimal -> "KeypadDecimal"; KeypadMultiply -> "KeypadMultiply";
+    KeypadPlus -> "KeypadPlus"; KeypadClear -> "KeypadClear"; KeypadDivide -> "KeypadDivide";
+    KeypadEnter -> "KeypadEnter"; KeypadMinus -> "KeypadMinus"; KeypadEquals -> "KeypadEquals";
+    Keypad0 -> "Keypad0"; Keypad1 -> "Keypad1"; Keypad2 -> "Keypad2";
+    Keypad3 -> "Keypad3"; Keypad4 -> "Keypad4"; Keypad5 -> "Keypad5";
+    Keypad6 -> "Keypad6"; Keypad7 -> "Keypad7"; Keypad8 -> "Keypad8"; Keypad9 -> "Keypad9";
+
+    Return -> "Return"; Tab -> "Tab"; Space -> "Space"; Delete -> "Delete";
+    Escape -> "Escape"; Command -> "Command"; Shift -> "Shift"; CapsLock -> "CapsLock";
+    Option -> "Option"; Control -> "Control"; RightCommand -> "RightCommand"; RightShift -> "RightShift";
+    RightOption -> "RightOption"; RightControl -> "RightControl"; Function -> "Function";
+    F17 -> "F17"; VolumeUp -> "VolumeUp"; VolumeDown -> "VolumeDown";
+    Mute -> "Mute"; F18 -> "F18"; F19 -> "F19"; F20 -> "F20"; F5 -> "F5";
+    F6 -> "F6"; F7 -> "F7"; F3 -> "F3"; F8 -> "F8"; F9 -> "F9"; F11 -> "F11"; F13 -> "F13";
+    F16 -> "F16"; F14 -> "F14"; F10 -> "F10"; F12 -> "F12"; F15 -> "F15"; Help -> "Help";
+    Home -> "Home"; PageUp -> "PageUp"; ForwardDelete -> "ForwardDelete"; F4 -> "F4";
+    End -> "End"; F2 -> "F2"; PageDown -> "PageDown"; F1 -> "F1"; LeftArrow -> "LeftArrow";
+    RightArrow -> "RightArrow"; DownArrow -> "DownArrow"; UpArrow -> "UpArrow";
+
+    Section -> "Section";
+
+    Yen -> "Yen"; Underscore -> "Underscore"; KeypadComma -> "KeypadComma";
+    Eisu -> "Eisu"; Kana -> "Kana";
+
+instance Read KeyCode where
+  readsPrec _ s = maybe [] pure . getFirst
+                $ keycodes & foldMap parseKey
+    where parseKey k = First $ (k,) <$> stripPrefix (show k) s

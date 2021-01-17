@@ -7,7 +7,7 @@ import Keyboard.Modifier
 data KeyMapSelect
   = KeyMapSelect {mapIndex :: Ix KeyMap
                  ,modifiers :: NonEmpty Modifier }
-    deriving Show
+    deriving (Show, Read)
 instance XML KeyMapSelect where
   fromXML (XML "keyMapSelect" as cs)
     = KeyMapSelect {mapIndex = Ix . readBS $ as ! "mapIndex"

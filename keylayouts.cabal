@@ -43,7 +43,7 @@ library
       Pre
   hs-source-dirs:
       src
-  default-extensions: LambdaCase BlockArguments StandaloneDeriving FlexibleInstances OverloadedStrings PatternSynonyms ViewPatterns NoImplicitPrelude GeneralizedNewtypeDeriving TypeApplications DisambiguateRecordFields DerivingStrategies
+  default-extensions: LambdaCase BlockArguments StandaloneDeriving FlexibleInstances OverloadedStrings PatternSynonyms ViewPatterns TupleSections NoImplicitPrelude GeneralizedNewtypeDeriving TypeApplications DisambiguateRecordFields DerivingStrategies
   build-depends:
       base >=4.7 && <5
     , bytestring

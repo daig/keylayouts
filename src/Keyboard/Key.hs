@@ -9,7 +9,7 @@ import Keyboard.Action
 data Key = KeyOutput {key_code :: KeyCode , key_output :: ByteString}
          | KeyNamedAction {key_code :: KeyCode, key_namedAction :: Id Action}
          | KeyAction {key_code :: KeyCode, key_action :: NonEmpty When}
-  deriving Show
+  deriving (Show, Read)
 instance XML Key where
   fromXML (XML "key" as cs) = let (Just (Virtual . readBS -> code), as') = updateLookupWithKey (\_ _ -> Nothing) "code" as
                               in case (toList as',cs) of

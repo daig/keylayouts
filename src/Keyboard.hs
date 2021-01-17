@@ -1,11 +1,11 @@
 {-# language MagicHash #-}
 module Keyboard (module Keyboard, XenoException(..)) where
 import Pre hiding (id)
-import Keyboard.Layouts
-import Keyboard.Modifier.Map
-import Keyboard.Action
-import Keyboard.Action.When.Terminator
-import Keyboard.Key.Map.Set
+import Keyboard.Layouts (Layouts)
+import Keyboard.Modifier.Map (ModifierMap)
+import Keyboard.Action (Action)
+import Keyboard.Action.When.Terminator (When_Terminator)
+import Keyboard.Key.Map.Set (KeyMapSet)
 
 newtype Group = Group {unGroup :: Word} deriving newtype (Show, Read)
 
@@ -21,7 +21,7 @@ data Keyboard = Keyboard {group :: Group
                          ,keyMapSets :: NonEmpty KeyMapSet
                          ,actions :: [Action]
                          ,terminators :: [When_Terminator] }
-  deriving Show
+  deriving (Show, Read)
 
 instance XML Keyboard where
   fromXML (XML "keyboard" as cs)
@@ -36,7 +36,7 @@ instance XML Keyboard where
                ,terminators = findName "terminators" cs}
   toXML k = printf "<keyboard group=\"%d\" id=\"%d\" name=%s %s>\n%s\n%s\n%s%s%s\n</keyboard>"
                    (group k & unGroup)
-                   (Keyboard.id k)
+                   (id k)
                    (name k & show)
                    (maxout k & maybe @String "" (printf "maxout = \"%s\"" . show))
                    (layouts k & toXML)

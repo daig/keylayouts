@@ -3,7 +3,7 @@ import Pre
 import Keyboard.Id
 import Keyboard.Action.When as X
 
-data Action = Action {id :: Id Action, whens :: NonEmpty When} deriving Show
+data Action = Action {id :: Id Action, whens :: NonEmpty When} deriving (Show, Read)
 instance XML Action where
   fromXML (XML "action" ((Id . (! "id")) -> i) cs) = Action i . fromList $ fmap fromXML cs
   toXML a = printf "\t\t<action id=\"%s\">\n%s\t\t</action>"
